@@ -1,22 +1,9 @@
-#include <ctype.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <io.h>
-char st[10000];
-int k=0,i=0;
-char x=0;
-int test(char x){
-    if (x=="+"){
-        return (st[k-2]+st[k-1]);}
-    if (x=="-"){
-        return (st[k-2]-st[k-1]);}
-    if (x=="/"){
-        return (st[k-2]/st[k-1]);}
-    if (x=="*"){
-        return (st[k-2]+st[k-1]);}
-}
-void push(char x){
-    if (k<=9999){
+#include <stdio.h>
+int st[100];
+int k=0;
+/*void push(float x){
+    if (k<=99){
         st[k]=x;
         k++;
     }
@@ -25,33 +12,57 @@ void push(char x){
     }
 
 }
-void pop(){
-    if (k>0){
-        k--;
-        st[k]="\0";
+float pop() {
+    return st[--k];
+    stek[count]='\0';
+}
+*/
+void push(char x){
+    if (k<=99){
+        st[k]=x;
+        k++;
     }
     else{
-        printf("stak empty\n");
+        printf("stak full\n");
     }
+
 }
+float pop(){
+        k--;
+        return k;
+        st[k]='\0';
+}
+
+
 
 int main()
 {
-    x=getchar();
-    while (x!="="){
-
-        /*if ("0"<=x<="9"){
-            push(x);
-        }
+    int x;
+    char h;
+    float pop1;
+    while ((x=getchar())!='='){
+        if (x>='0' && x<='9')
+            push(x-'0');}
         else{
-          i=test(x);
-          pop();
-          st[k-1]=i;
-        }
-        x=getchar();*/
-        printf("%c",x);
-        x=getchar();
+            h=x
+            switch (h){
+                case '+':
+                    pop1=pop();
+                    push(pop()+pop1);
+                case '-':
+                    pop1=pop();
+                    push (pop()-pop1);
+                case '/':
+                    pop1=pop();
+                    if (pop1!=0.0)
+                        push(pop() / pop1);
+                    else
+                        printf(" delit nelzya");
+                case '*':
+                    pop1=pop();
+                    push (pop()*pop1);
+                }
     }
-    /*printf("%c",st[0]);*/
+    printf("%d",pop());
     return 0;
 }
